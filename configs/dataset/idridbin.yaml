@@ -1,0 +1,25 @@
+# @package _global_
+dataset:
+  dir: ./datasets
+  name: idrid
+  name_eval: idrid
+  feature: drbin
+  image_size: [256, 256]
+  sample_size: null
+  kfold: 0
+
+model:
+  dropout: 0
+
+train:
+  label_smoothing: 0
+
+stop:
+  min_delta: 0.002
+  patience: 5
+  monitor: loss
+
+optim:
+  lr_backbone: 1e-5
+  lr_head: 1e-4
+  wd: 1e-4

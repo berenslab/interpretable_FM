@@ -1,0 +1,48 @@
+defaults:
+  - _self_
+  - dataset: idridbin
+
+sweep_name: 'sweep_${dataset.name}_sparsity'
+
+seed: null
+device: cuda:0
+
+model:
+  name: tsimcne2d_bagnet33_all_256_1225/tsimcne2d_bagnet33_all_256_1225.pt
+  sparsity: 0
+
+train:
+  batch_size: 16
+  epochs: 50
+  unfreeze_epoch: 10
+  loss_weighted: true
+  num_workers: 4
+
+wandb:
+  mode: offline
+
+hydra:
+  searchpath:
+    - file://configs
+  run:
+    dir: experiments
+
+  sweep:
+    dir: experiments/${sweep_name}
+    subdir: ${hydra.job.override_dirname}
+
+  sweeper:
+    params:
+      model.sparsity: 0, 1e-6, 1e-5, 1e-4, 1e-3, 1e-2, 1e-1
+
+  job:
+    config:
+      override_dirname:
+        kv_sep: "="
+        item_sep: "_"
+        exclude_keys:
+          - model.name
+          - experiment_prefix
+          - dataset.name
+          - dataset.name_eval
+          - dataset.feature

@@ -1,0 +1,62 @@
+sweep_name: 'sweep_${dataset.name}_lr'
+
+seed: null
+device: cuda:0
+
+dataset:
+  dir: ./datasets
+  name: papila # eye datasets: eyepacs, areds, ukb, idrid, aptos, messidor, deepdrid, glaucoma, papila, fives
+  name_eval: papila # To evaluate on a different dataset
+  feature: glaucoma
+  image_size: [256, 256]
+  sample_size: null # number of samples to use from dataset (to debug)
+  kfold: 0
+
+model: 
+  name: tsimcne2d_bagnet33_all_256_1225/tsimcne2d_bagnet33_all_256_1225.pt # resnet, bagnet or pretrained checkpoint (path to checkpoint inside checkpoints folder)
+  dropout: 0
+  sparsity: 0 # sparsity constraint strength
+
+train:
+  batch_size: 16
+  epochs: 25
+  unfreeze_epoch: 25
+  loss_weighted: true # whether to weight cross-entropy loss
+  label_smoothing: 0
+  num_workers: 4
+
+optim:  # Adam
+    lr_backbone: 5e-5
+    lr_head: 5e-4
+    wd: 1e-3
+
+stop:
+  min_delta: 0.01
+  patience: 50
+  monitor: 'loss'
+
+# To disable wandb mode: disabled
+wandb:
+  mode: offline
+
+hydra:
+  searchpath:
+          - file://configs
+  run:
+    dir: experiments
+
+  sweep:
+    dir: experiments/${sweep_name}
+    subdir: ${hydra.job.override_dirname}
+
+  sweeper:
+    params:
+      optim.lr_head: 1e-3, 5e-4, 1e-4
+      optim.wd: 0, 1e-4, 1e-3
+
+  # To make names shorter instead of optimizer.lr, just lr
+  job:
+    config:
+      override_dirname:
+        kv_sep: "="
+        item_sep: "_"

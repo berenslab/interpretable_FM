@@ -1,0 +1,28 @@
+defaults:
+  - _self_
+  - dataset: aptos # eye datasets: eyepacs, areds, ukb, idrid, aptos, messidor, deepdrid, glaucoma, papila, fives
+
+experiment_prefix: tsimcneb
+experiment_name: clflin_${experiment_prefix}_${dataset.name}_${dataset.feature}_${dataset.image_size[0]}
+
+seed: 42
+device: cuda:0
+
+model: 
+  name: bagnet33 # resnet, bagnet or pretrained checkpoint (path to checkpoint inside checkpoints folder)
+
+train:
+  batch_size: 256 # To compute embeddings
+  num_workers: 4
+  solver: 'saga'
+  penalty: 'elasticnet'
+  l1_ratio: 0.5
+  c: 1
+  class_weight: 'balanced'
+  max_iter: 20000
+  
+hydra:
+  searchpath:
+        - file://configs
+  run:
+    dir: experiments/${experiment_name}

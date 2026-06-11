@@ -1,0 +1,26 @@
+# @package _global_
+dataset:
+  dir: ./datasets
+  name: eyepacs
+  name_eval: eyepacs
+  feature: dr
+  image_size: [256, 256]
+  sample_size: null
+  kfold: 0
+
+model:
+  dropout: 0.2
+
+train:
+  label_smoothing: 0
+
+stop:
+  min_delta: 0.01
+  patience: 10
+  monitor: loss
+
+optim:
+  lr_backbone: 5e-6
+  lr_head: 5e-4
+  wd: 1e-4
+

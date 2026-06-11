@@ -1,0 +1,29 @@
+defaults:
+  - _self_
+  - dataset: aptos
+
+experiment_prefix: tsimcneb
+experiment_name: clf_${experiment_prefix}_${dataset.name}_${dataset.feature}_${dataset.image_size[0]}_${dataset.kfold}
+
+seed: null
+device: cuda:0
+
+model:
+  name: tsimcne2d_bagnet33_all_256_1225/tsimcne2d_bagnet33_all_256_1225.pt
+  sparsity: 0
+
+train:
+  batch_size: 16
+  epochs: 50
+  unfreeze_epoch: 10
+  loss_weighted: true
+  num_workers: 4
+
+wandb:
+  mode: offline
+
+hydra:
+  searchpath:
+    - file://configs
+  run:
+    dir: experiments/${experiment_name}

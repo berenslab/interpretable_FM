@@ -1,0 +1,27 @@
+defaults:
+  - _self_
+  - dataset: aptos
+
+experiment_prefix: tsimcneb
+experiment_name: clfproj_${experiment_prefix}_${dataset.name}_${dataset.feature}_${dataset.image_size[0]}_${dataset.kfold}
+
+seed: null
+device: cuda:0
+
+model: 
+  name: clf_tsimcneb_aptos_dr_256/dataset.kfold=1.pt # checkpoint from finetuning (path to checkpoint inside checkpoints folder)
+
+train:
+  batch_size: 256
+  epochs: 100
+  num_workers: 4
+
+# To disable wandb mode: disabled
+wandb:
+  mode: offline
+
+hydra:
+  searchpath:
+        - file://configs
+  run:
+    dir: experiments/${experiment_name}

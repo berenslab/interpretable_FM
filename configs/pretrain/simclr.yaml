@@ -1,0 +1,30 @@
+experiment_name: simclr_${backbone.name}_${dataset.name}_${dataset.image_size[0]}_${train.epochs}
+
+seed: 42
+device: cuda:0
+
+dataset:
+  name: cifar10 # cifar10, imagenette, eyepacs, areds, ukb, all
+  name_eval: cifar10 # To evaluate on a different dataset
+  dir: ./datasets
+  image_size: [32, 32]
+  sample_size: null # number of samples to use from dataset (to debug)
+
+backbone:
+  name: resnet18 # resnet18, resnet50, bagnet33, bagnet17, bagnet9
+
+train:
+  batch_size: 1024 # Effective batch size for multigpu
+  num_workers: 4
+  epochs: 1000
+
+wandb:
+  mode: offline # mode: online, offline, disabled
+  grad: true # log gradient norm
+  freq: 1 # log frequency (steps)
+
+hydra:
+  searchpath:
+        - file://configs
+  run:
+    dir: experiments/${experiment_name}

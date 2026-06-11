@@ -1,0 +1,25 @@
+# @package _global_
+dataset:
+  dir: ./datasets
+  name: glaucoma
+  name_eval: glaucoma
+  feature: glaucoma
+  image_size: [256, 256]
+  sample_size: null
+  kfold: 0
+
+model:
+  dropout: 0.5
+
+train:
+  label_smoothing: 0
+
+stop:
+  min_delta: 0.01
+  patience: 15
+  monitor: loss
+
+optim:
+  lr_backbone: 1e-4
+  lr_head: 5e-4
+  wd: 1e-4
