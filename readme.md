@@ -1,6 +1,6 @@
 # Dual-IFM: Interpretable Foundation Model for Retinal Fundus Images
 
-This repository contains the code for the paper ["Towards Interpretable Foundation Models for Retinal Fundus Images"](https://arxiv.org/pdf/2603.18846). We introduce a foundation model for retinal fundus images that is interpretable-by-design in two ways: **local interpretability** for individual images through class evidence maps faithful to the decision-making process, and **global interpretability** for entire datasets through a 2D projection layer for direct visualization of the representation space.
+This repository contains the code for the paper ["Towards Interpretable Foundation Models for Retinal Fundus Images"](https://arxiv.org/pdf/2603.18846). We introduce Dual-IFM, an interpretable foundation model for retinal fundus images that combines local explanations with a direct visualization of the representation space.
 
 ![Dual-IFM architecture](images/architecture.png)
 
@@ -129,7 +129,7 @@ bash scripts/classification/align_projector.sh  # 2D projector alignment for vis
 |---|---|
 | [`usage.ipynb`](./notebooks/usage.ipynb) | Load pretrained model, run inference on a sample input |
 | [`preprocess_datasets.ipynb`](./notebooks/preprocess_datasets.ipynb) | Preprocess dataset metadata to match the expected format |
-| [`eval_global.ipynb`](./notebooks/eval_global.ipynb) | Global interpretability — 2D projection visualization |
+| [`eval_global.ipynb`](./notebooks/eval_global.ipynb) | Global structure inspection — 2D projection visualization |
 | [`eval_local.ipynb`](./notebooks/eval_local.ipynb) | Local interpretability — class evidence maps |
 | [`eval_clf_linear.ipynb`](./notebooks/eval_clf_linear.ipynb) | Linear probe evaluation results |
 | [`eval_clf_finetune.ipynb`](./notebooks/eval_clf_finetune.ipynb) | Finetuning evaluation results |
