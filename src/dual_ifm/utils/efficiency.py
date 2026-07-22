@@ -4,7 +4,7 @@ import time
 from pathlib import Path
 
 import torch
-from tsimcne import models
+from dual_ifm.tsimcne import models
 
 
 def get_args():
@@ -12,7 +12,7 @@ def get_args():
 
     parser.add_argument(
         '--checkpoint',
-        default='tsimcne2d_bagnet33_all_256_1225.pt',
+        default='tsimcne2d_bagnet33_all_256_1225/tsimcne2d_bagnet33_all_256_1225.pt',
         type=str,
         help='checkpoint path, relative to checkpoints directory',
     )
