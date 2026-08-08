@@ -42,7 +42,7 @@ Checkpoint filenames follow the format:
 - `image_size` – square image resolution (e.g. 256 → 256×256).
 - `epochs` – number of pretraining epochs.
 
-The Dual-IFM checkpoint is [tsimcne2d_bagnet33_all_256_1225.pt](./model_weights/tsimcne2d_bagnet33_all_256_1225.pt).
+The Dual-IFM checkpoint is [tsimcne2d_bagnet33_all_256_1225.pt](./model_weights/tsimcne2d_bagnet33_all_256_1225.pt): trained with t-SimCNE using SimCLR cosine-similarity loss for stage one before switching to the standard t-SimCNE Euclidean/Cauchy-similarity loss for the last two stages.
 
 ---
 
